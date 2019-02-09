@@ -5,7 +5,7 @@ var reader = rd.createInterface(fs.createReadStream("./src/day1/input.txt"))
 
 var data: string;
 reader.on("line", (l: string) => {
-    data = '12131415';//l;
+    data = l;
 })
 
 reader.on("close", () => {
@@ -40,7 +40,7 @@ function main2(): number {
         let actual = parseInt(data[i]);
 
         let fullI = i + center;
-        let indexNext = i < center ? fullI : data.length - fullI
+        let indexNext = i < center ? fullI : fullI - data.length
         let next = parseInt(data[indexNext]);
 
         if (actual === next) {
