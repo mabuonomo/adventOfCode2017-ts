@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as rd from 'readline'
 
-var reader = rd.createInterface(fs.createReadStream("./src/day1/input.txt"))
+var reader = rd.createInterface(fs.createReadStream(__dirname + "/input.txt"))
 
 var data: string;
 reader.on("line", (l: string) => {
