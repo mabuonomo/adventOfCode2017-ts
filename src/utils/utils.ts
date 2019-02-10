@@ -123,8 +123,8 @@ export function createSpiralMatrix(
 }
 
 export function printMatrix(matrix: Array<Array<number>>, size: number, showPosition: boolean = false) {
-    for (let x = 0; x <= size; x++) {
-        for (let y = 0; y <= size; y++) {
+    for (let y = 0; y <= size; y++) {
+        for (let x = 0; x <= size; x++) {
             if (matrix[x] === undefined || matrix[x][y] === undefined) {
                 // process.stdout.write(' ');
             } else {
