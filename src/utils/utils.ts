@@ -22,7 +22,7 @@ export function createSpiralMatrix(
 ): Array<Array<number>> {
 
     // exit condition
-    if (nextValue == size) {
+    if (nextValue > size) {
         return matrix
     }
 
@@ -122,13 +122,16 @@ export function createSpiralMatrix(
     return matrix
 }
 
-export function printMatrix(matrix: Array<Array<number>>, size: number) {
+export function printMatrix(matrix: Array<Array<number>>, size: number, showPosition: boolean = false) {
     for (let x = 0; x <= size; x++) {
         for (let y = 0; y <= size; y++) {
             if (matrix[x] === undefined || matrix[x][y] === undefined) {
-                process.stdout.write('.');
+                process.stdout.write(' ');
             } else {
-                process.stdout.write('-' + matrix[x][y].toString()+ '-');
+                if (showPosition)
+                    process.stdout.write('.' + matrix[x][y].toString() + '[' + x + ',' + y + '].');
+                else
+                    process.stdout.write('.' + matrix[x][y].toString() + '.');
             }
         }
 
