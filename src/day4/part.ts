@@ -4,15 +4,20 @@ import * as rd from 'readline'
 var reader = rd.createInterface(fs.createReadStream(__dirname + "/input.txt"))
 
 var data: Array<Array<string>> = [];
+var dataSort: Array<Array<string>> = [];
+
 reader.on("line", (l: string) => {
     let datas = l.split(' ');
 
     let line: Array<string> = [];
+    let lineSort: Array<string> = []
     datas.forEach(element => {
         line.push(element)
+        lineSort.push(element.split('').sort().join(''))
     });
 
     data.push(line)
+    dataSort.push(lineSort)
 })
 
 reader.on("close", () => {
@@ -33,5 +38,13 @@ function main1(): number {
 }
 
 function main2(): number {
-    return 0
+    let validCounter = 0
+    dataSort.forEach(row => {
+        // all element are distinct
+        if (row.every(function (elem, i, array) { return array.lastIndexOf(elem) === i })) {
+            validCounter++
+        }
+    });
+
+    return validCounter
 }
