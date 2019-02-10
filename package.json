@@ -5,7 +5,8 @@
   "scripts": {
     "test": "typings-checker --allow-expect-error",
     "test-all": "npm test -- solutions/**/*.ts",
-    "fix-prettier": "prettier --write \"./{src}/**/*.ts\""
+    "fix-prettier": "prettier --write \"./{src}/**/*.ts\"",
+    "fix-memory-limit": "cross-env LIMIT=2048 increase-memory-limit"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "express": "^4.16.3",
     "fp-ts": "^1.13.0",
     "fs": "0.0.1-security",
+    "increase-memory-limit": "^1.0.6",
     "lodash": "^4.17.11",
     "react": "^16.8.1"
   },

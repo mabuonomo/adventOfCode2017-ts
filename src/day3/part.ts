@@ -1,10 +1,10 @@
 import { createSpiralMatrix, Step, printMatrix, indexOf2d, manhattanDistance } from "../utils/utils";
 
-let size = 347991
-// let size = 23
+// let size = 347991
+let size = 23
 let matrix = createSpiralMatrix(size, Step.CENTER, { x: 0, y: 0 }, 1)
 
-// printMatrix(matrix, size * 2, true)
+printMatrix(matrix, size * 2, true)
 
 console.log('Result 1: ' + main1());
 // console.log('Result 2: ' + main2());
