@@ -1,17 +1,18 @@
-import { createSpiralMatrix, Step, printMatrix, indexOf2d, manhattanDistance } from "../utils/utils";
+import { createSpiralMatrix, Step, printMatrix, indexOf2d, manhattanDistance, trampoline } from "../utils/utils";
 
-// let size = 347991
-let size = 23
-let matrix = createSpiralMatrix(size, Step.CENTER, { x: 0, y: 0 }, 1)
+let size = 347991
+// let size = 23
+let matrix = trampoline(createSpiralMatrix)
 
-printMatrix(matrix, size * 2, true)
+let result_matrix = matrix(size, Step.CENTER, { x: 0, y: 0 }, 1)
+// printMatrix(matrix, size * 2, true)
 
 console.log('Result 1: ' + main1());
-// console.log('Result 2: ' + main2());
+// // console.log('Result 2: ' + main2());
 
 function main1() {
-    let door = indexOf2d(matrix, 1)
-    let last = indexOf2d(matrix, size)
+    let door = indexOf2d(result_matrix, 1)
+    let last = indexOf2d(result_matrix, size)
 
     console.log(door + ' ' + last)
 

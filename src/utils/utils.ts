@@ -20,7 +20,7 @@ export function createSpiralMatrix(
     nextDirection: Step,
     nextPosition: Geo,
     nextValue: number
-): Array<Array<number>> {
+) {
 
     // exit condition
     if (nextValue > size) {
@@ -43,7 +43,7 @@ export function createSpiralMatrix(
     // console.log('Direction: ' + nextDirection.toString() + ' ' + nextValue)
 
     // next value
-    ++nextValue
+    let value = nextValue + 1
     let nextStep: Step
     let nextPos: Geo
 
@@ -91,7 +91,7 @@ export function createSpiralMatrix(
             break;
     }
 
-    return createSpiralMatrix(size, nextStep, nextPos, nextValue)
+    return () => createSpiralMatrix(size, nextStep, nextPos, value)
     // return matrix
 }
 
@@ -141,4 +141,15 @@ export function indexOf2d(arr: Array<Array<number>>, val: number) {
     });
 
     return index;
+}
+
+// resolve maximum call stack size exceeded
+export const trampoline = fn => (...args) => {
+    let result = fn(...args)
+
+    while (typeof result === 'function') {
+        result = result()
+    }
+
+    return result
 }
