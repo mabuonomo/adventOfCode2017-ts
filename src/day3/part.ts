@@ -1,5 +1,6 @@
 import { createSpiralMatrix, Step, printMatrix, indexOf2d, manhattanDistance } from "../utils/utils";
 
+// let size = 347991
 let size = 25
 let matrix = createSpiralMatrix([], size, Step.CENTER, { x: 0, y: 0 }, 1)
 

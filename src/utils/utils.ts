@@ -40,7 +40,7 @@ export function createSpiralMatrix(
 
     matrix[nextPosition.x][nextPosition.y] = nextValue
 
-    console.log('Direction: ' + nextDirection.toString() + ' ' + nextValue)
+    // console.log('Direction: ' + nextDirection.toString() + ' ' + nextValue)
 
     ++nextValue
     switch (nextDirection) {
@@ -133,10 +133,13 @@ export function createSpiralMatrix(
 
 export function printMatrix(matrix: Array<Array<number>>, size: number, showPosition: boolean = false) {
     for (let y = 0; y <= size; y++) {
+
+        let found = false
         for (let x = 0; x <= size; x++) {
             if (matrix[x] === undefined || matrix[x][y] === undefined) {
                 // process.stdout.write(' ');
             } else {
+                found = true
                 if (showPosition)
                     process.stdout.write('.' + matrix[x][y].toString() + '[' + x + ',' + y + '].');
                 else
@@ -144,7 +147,8 @@ export function printMatrix(matrix: Array<Array<number>>, size: number, showPosi
             }
         }
 
-        process.stdout.write('\n');
+        if (found)
+            process.stdout.write('\n');
     }
     process.stdout.write('\n\n');
 }
