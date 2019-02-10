@@ -4,9 +4,11 @@ import * as rd from 'readline'
 var reader = rd.createInterface(fs.createReadStream(__dirname + "/input.txt"))
 
 var data: Array<number> = [];
+var data2: Array<number> = [];
 
 reader.on("line", (l: string) => {
     data.push(parseInt(l))
+    data2.push(parseInt(l))
 })
 
 reader.on("close", () => {
@@ -18,20 +20,27 @@ function main1(): number {
     let step = 0
     let index = 0
 
-    // console.log(data)
-
     while (index < data.length) {
         data[index] += 1
         index += data[index] - 1
         step++
-
-        // console.log(data)
-        // console.log('Pivot: ' + index)
     }
 
     return step
 }
 
 function main2(): number {
-    return 0
+    let step = 0
+    let index = 0
+
+    while (index < data2.length) {
+        let jump = data2[index] >= 3 ? -1 : 1
+        data2[index] += jump
+        index += data2[index] - jump
+        step++
+
+        // console.log(data2)
+    }
+
+    return step
 }
