@@ -15,7 +15,7 @@ function main1() {
     let door = indexOf2d(result_matrix, 1)
     let last = indexOf2d(result_matrix, size)
 
-    console.log(door + ' ' + last)
+    // console.log(door + ' ' + last)
 
     let distance = manhattanDistance({ x: door[0], y: door[1], z: 0 }, { x: last[0], y: last[1], z: 0 })
 
