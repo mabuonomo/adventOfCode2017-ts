@@ -39,7 +39,7 @@ export function createSpiralMatrix(
 
     matrix[nextPosition.x][nextPosition.y] = nextValue
 
-    console.log('Direction: ' + nextDirection.toString() + ' ' + nextValue)
+    // console.log('Direction: ' + nextDirection.toString() + ' ' + nextValue)
 
     ++nextValue
     switch (nextDirection) {
@@ -126,7 +126,7 @@ export function printMatrix(matrix: Array<Array<number>>, size: number, showPosi
     for (let x = 0; x <= size; x++) {
         for (let y = 0; y <= size; y++) {
             if (matrix[x] === undefined || matrix[x][y] === undefined) {
-                process.stdout.write(' ');
+                // process.stdout.write(' ');
             } else {
                 if (showPosition)
                     process.stdout.write('.' + matrix[x][y].toString() + '[' + x + ',' + y + '].');
@@ -138,4 +138,30 @@ export function printMatrix(matrix: Array<Array<number>>, size: number, showPosi
         process.stdout.write('\n');
     }
     process.stdout.write('\n\n');
+}
+
+export function indexOf2d(arr: Array<Array<number>>, val: number) {
+    var index = [-1, -1];
+
+    if (!Array.isArray(arr)) {
+        return index;
+    }
+
+    arr.some(function (sub, posX) {
+        if (!Array.isArray(sub)) {
+            return false;
+        }
+
+        var posY = sub.indexOf(val);
+
+        if (posY !== -1) {
+            index[0] = posX;
+            index[1] = posY;
+            return true;
+        }
+
+        return false;
+    });
+
+    return index;
 }
