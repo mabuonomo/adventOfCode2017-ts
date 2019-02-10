@@ -14,8 +14,8 @@ export enum Step {
     CENTER
 }
 
+let matrix: Array<Array<number>> = []
 export function createSpiralMatrix(
-    matrix: Array<Array<number>>,
     size: number,
     nextDirection: Step,
     nextPosition: Geo,
@@ -42,11 +42,13 @@ export function createSpiralMatrix(
 
     // console.log('Direction: ' + nextDirection.toString() + ' ' + nextValue)
 
+    // next value
     ++nextValue
+
     switch (nextDirection) {
         case Step.CENTER:
             return createSpiralMatrix(
-                matrix,
+                // matrix,
                 size,
                 Step.RIGHT,
                 { x: actualPosition.x + 1, y: actualPosition.y },
@@ -55,7 +57,7 @@ export function createSpiralMatrix(
         case Step.RIGHT:
             if (matrix[nextPosition.x][nextPosition.y - 1] == undefined) {
                 return createSpiralMatrix(
-                    matrix,
+                    // matrix,
                     size,
                     Step.UP,
                     { x: actualPosition.x, y: actualPosition.y - 1 },
@@ -63,7 +65,7 @@ export function createSpiralMatrix(
                 )
             } else {
                 return createSpiralMatrix(
-                    matrix,
+                    // matrix,
                     size,
                     Step.RIGHT,
                     { x: actualPosition.x + 1, y: actualPosition.y },
@@ -73,7 +75,7 @@ export function createSpiralMatrix(
         case Step.DOWN:
             if (matrix[nextPosition.x + 1] == undefined || matrix[nextPosition.x + 1][nextPosition.y] == undefined) {
                 return createSpiralMatrix(
-                    matrix,
+                    // matrix,
                     size,
                     Step.RIGHT,
                     { x: actualPosition.x + 1, y: actualPosition.y },
@@ -81,7 +83,7 @@ export function createSpiralMatrix(
                 )
             } else {
                 return createSpiralMatrix(
-                    matrix,
+                    // matrix,
                     size,
                     Step.DOWN,
                     { x: actualPosition.x, y: actualPosition.y + 1 },
@@ -92,7 +94,7 @@ export function createSpiralMatrix(
         case Step.LEFT:
             if (matrix[nextPosition.x][nextPosition.y + 1] == undefined) {
                 return createSpiralMatrix(
-                    matrix,
+                    // matrix,
                     size,
                     Step.DOWN,
                     { x: actualPosition.x, y: actualPosition.y + 1 },
@@ -100,7 +102,7 @@ export function createSpiralMatrix(
                 )
             } else {
                 return createSpiralMatrix(
-                    matrix,
+                    // matrix,
                     size,
                     Step.LEFT,
                     { x: actualPosition.x - 1, y: actualPosition.y },
@@ -111,7 +113,7 @@ export function createSpiralMatrix(
         case Step.UP:
             if (matrix[nextPosition.x - 1] == undefined || matrix[nextPosition.x - 1][nextPosition.y] == undefined) {
                 return createSpiralMatrix(
-                    matrix,
+                    // matrix,
                     size,
                     Step.LEFT,
                     { x: actualPosition.x - 1, y: actualPosition.y },
@@ -119,7 +121,7 @@ export function createSpiralMatrix(
                 )
             } else {
                 return createSpiralMatrix(
-                    matrix,
+                    // matrix,
                     size,
                     Step.UP,
                     { x: actualPosition.x, y: actualPosition.y - 1 },
