@@ -1,6 +1,6 @@
 import { number } from "prop-types";
 
-type Geo = { x: number, y: number, z?: number }
+export type Geo = { x: number, y: number, z?: number }
 
 export function manhattanDistance(point1: Geo, point2: Geo): number {
     return Math.abs(point1.x - point2.x) + Math.abs(point1.y - point2.y) + Math.abs(point1.z - point2.z)
