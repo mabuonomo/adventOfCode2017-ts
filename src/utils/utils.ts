@@ -10,7 +10,8 @@ export enum Step {
     UP,
     DOWN,
     RIGHT,
-    LEFT
+    LEFT,
+    CENTER
 }
 
 export function createSpiralMatrix(
@@ -39,10 +40,18 @@ export function createSpiralMatrix(
 
     matrix[nextPosition.x][nextPosition.y] = nextValue
 
-    // console.log('Direction: ' + nextDirection.toString() + ' ' + nextValue)
+    console.log('Direction: ' + nextDirection.toString() + ' ' + nextValue)
 
     ++nextValue
     switch (nextDirection) {
+        case Step.CENTER:
+            return createSpiralMatrix(
+                matrix,
+                size,
+                Step.RIGHT,
+                { x: actualPosition.x + 1, y: actualPosition.y },
+                nextValue
+            )
         case Step.RIGHT:
             if (matrix[nextPosition.x][nextPosition.y - 1] == undefined) {
                 return createSpiralMatrix(
@@ -113,7 +122,7 @@ export function createSpiralMatrix(
                     matrix,
                     size,
                     Step.UP,
-                    { x: actualPosition.x, y: actualPosition.y + 1 },
+                    { x: actualPosition.x, y: actualPosition.y - 1 },
                     nextValue++
                 )
             }
