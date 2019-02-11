@@ -6,17 +6,21 @@ export function walk(array: Array<number>, step: number) {
     let add = Math.floor(max / (array.length - 1))
     // let mod = max % add
 
-    console.log(array + ' add: ' + add + ' max: ' + max + ' i: ' + iMax)
+    // console.log(array + ' add: ' + add + ' max: ' + max + ' i: ' + iMax)
+
+    array[iMax] = 0
 
     let value = max
-    for (let i = 0; i < array.length; i++) {
-        if (i != iMax) {
-            array[i] += add
-            value -= add
+    let i = iMax + 1
+    while (value > 0) {
+        if (i == array.length) {
+            i = 0
         }
-    }
 
-    array[iMax] = value
+        array[i] += 1
+        value--
+        i++
+    }
 
     step++
 
