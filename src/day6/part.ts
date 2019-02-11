@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as rd from 'readline'
-import { walk } from './utils';
+import { walk, walk2 } from './utils';
 import { trampoline } from '../utils/utils';
 
 var reader = rd.createInterface(fs.createReadStream(__dirname + "/input.txt"))
@@ -28,5 +28,6 @@ function main1(): number {
 }
 
 function main2(): number {
-    return 0
+    let res = trampoline(walk2)
+    return res(data)
 }
