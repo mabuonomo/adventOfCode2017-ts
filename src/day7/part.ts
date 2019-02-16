@@ -3,7 +3,7 @@ import * as rd from 'readline'
 import { NodeWeight, findWeightFrom } from './utils';
 
 var reader = rd.createInterface(fs.createReadStream(__dirname + "/input.txt"))
-var reader = rd.createInterface(fs.createReadStream(__dirname + "/test.txt"))
+// var reader = rd.createInterface(fs.createReadStream(__dirname + "/test.txt"))
 
 var left: Array<NodeWeight> = []
 var right: Array<string> = []
@@ -47,30 +47,40 @@ function main1() {
 
 function main2() {
     let res = result[0]
-    console.log(res)
+    // console.log(res)
 
-    let min: number = Infinity
-    let max: number = -Infinity
-    let maxNode: string
+    let output: Array<number> = []
+    left.forEach(res => {
+        let min: number = Infinity
+        let max: number = -Infinity
+        let maxNode: string
 
-    res.childs.forEach(element => {
-        let sum = findWeightFrom(element, left)
-        console.log(sum)
+        res.childs.forEach(element => {
+            let sum = findWeightFrom(element, left)
+            // console.log(sum)
 
-        if (sum > max) {
-            max = sum
-            maxNode = element
-        }
+            if (sum > max) {
+                max = sum
+                maxNode = element
+            }
 
-        if (sum < min) {
-            min = sum
+            if (sum < min) {
+                min = sum
+            }
+        });
+
+        let diff = max - min
+        let node = left.find((value, index, array) => value.name == maxNode)
+
+        // console.log(node);
+        // console.log(diff)
+        // console.log('****')
+
+        if (diff > 0) {
+            // console.log('result')
+            output.push(node.weight - diff)
         }
     });
 
-    let diff = max - min
-    let node = left.find((value, index, array) => value.name == maxNode)
-
-    console.log(node);
-    console.log(diff)
-    return node.weight - diff
+    return JSON.stringify(output[0])
 }
