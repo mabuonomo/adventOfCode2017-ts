@@ -1,36 +1,27 @@
 import * as fs from 'fs';
 import * as rd from 'readline'
-import { Tower, Tree } from './utils';
 
 var reader = rd.createInterface(fs.createReadStream(__dirname + "/input.txt"))
 // var reader = rd.createInterface(fs.createReadStream(__dirname + "/test.txt"))
 
-var tree: Tree = new Tree()
-var left: Array<string> = []
+type Node = { name: string, weight: number }
+var left: Array<Node> = []
 var right: Array<string> = []
 
 // uylvg (403) -> xrvcjq, hihltxf, junpjcj, onkvtu, cckdoyb, favay, xsygurk
 reader.on("line", (l: string) => {
     let line = l.split(' ')
-    left.push(line[0].trim())
-    // let father: Tower = { name: line[0].trim(), weight: 0 }
+    let name = line[0].trim();
+    let weight = parseInt(line[1].slice(1, -1))
+    left.push({ name: name, weight: weight })
 
-    // let childs: Array<Tower> = []
     try {
         // console.log(l.split('->'))
         line = l.split('->')[1].split(',')
         line.forEach(element => {
-            // let child: Tower = { name: element.trim(), weight: 0 }
-            // childs.push(child)
             right.push(element.trim())
         });
     } catch (e) { }
-
-    // // console.log(data)
-    // let node = tree.createNode(father, childs)
-    // tree.insertNode(node)
-
-    // console.log(tree.getHead())
 })
 
 reader.on("close", () => {
@@ -40,17 +31,17 @@ reader.on("close", () => {
 
 function main1() {
 
-    let result: Array<string> = []
+    let result: Array<Node> = []
 
     left.forEach(element => {
-        let found = right.find((value, index, array) => value == element)
+        let found = right.find((value, index, array) => value == element.name)
 
         if (found == undefined) {
             result.push(element)
         }
     })
 
-    return result
+    return JSON.stringify(result)
 }
 
 function main2(): number {
