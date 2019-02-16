@@ -35,6 +35,7 @@ reader.on("close", () => {
 })
 
 // pmp inc -432 if sdj <= -648
+let max = 0
 function main1() {
     // console.log(operations)
 
@@ -49,6 +50,10 @@ function main1() {
 
         // console.log(registry)
 
+        let v = findMaxRegistry(registry)
+        if (max < v) {
+            max = v
+        }
     });
 
     // console.log(registry)
@@ -56,5 +61,5 @@ function main1() {
 }
 
 function main2() {
-    return 0
+    return max
 }
