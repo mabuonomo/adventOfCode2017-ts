@@ -46,9 +46,6 @@ function main1() {
 }
 
 function main2() {
-    let res = result[0]
-    // console.log(res)
-
     let output: Array<number> = []
     left.forEach(res => {
         let min: number = Infinity
