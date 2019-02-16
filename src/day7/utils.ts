@@ -15,7 +15,8 @@ class Node {
 }
 
 export class Tree {
-    private head: Node = null;
+    private head: Node = undefined;
+    private horfans : Array<Node> = []
 
     public getHead(): Node {
         return this.head
@@ -31,9 +32,11 @@ export class Tree {
             return node
         }
 
-        node.childs.forEach((element: Node) => {
-            return this.findNodeByName(name, element)
-        });
+        if (node.childs != undefined) {
+            node.childs.forEach((element: Node) => {
+                return this.findNodeByName(name, element)
+            });
+        }
 
         return undefined
     }
@@ -45,6 +48,7 @@ export class Tree {
         children.forEach(element => {
             let child = new Node(element)
             child.father = node
+            childs.push(child)
         });
 
         node.childs = childs
@@ -60,7 +64,7 @@ export class Tree {
 
         let found = this.findNodeByName(node.elem.name)
         if (found == undefined) {
-            this.head = node
+            this.horfans.push(node)
             return
         }
 
