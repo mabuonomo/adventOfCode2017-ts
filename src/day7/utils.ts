@@ -5,83 +5,71 @@ export type Tower = {
 
 class Node {
     public elem: Tower;
-    public next: Node;
+    public childs: Array<Node>;
+    public father: Node
 
-    constructor(elem) {
+    constructor(elem: Tower) {
         this.elem = elem;
-        this.next = null;
+        this.childs = null;
     }
 }
 
-export class LinkedList {
+export class Tree {
     private head: Node = null;
-    private len: number = 0;
 
     public getHead(): Node {
         return this.head
     }
 
-    public append(elem: Tower) {
-        let node = new Node(elem);
-        let current: Node;
+    public findNodeByName(name: string, node?: Node) {
 
-        if (this.head === null) {
-            this.head = node;
-        } else {
-            current = this.head;
-            while (current.next) {
-                current = current.next;
-            }
-            current.next = node;
+        if (node == undefined) {
+            node = this.getHead()
         }
-        this.len++;
+
+        if (node.elem.name == name) {
+            return node
+        }
+
+        node.childs.forEach((element: Node) => {
+            return this.findNodeByName(name, element)
+        });
+
+        return undefined
     }
 
-    public removeAt(pos: number) {
-        if (pos > -1 && pos < this.len) {
-            let current: Node = this.head;
-            let previous: Node;
-            let index: number = 0;
+    public createNode(tower: Tower, children: Array<Tower>): Node {
+        let node = new Node(tower)
+        let childs: Array<Node> = []
 
-            if (pos === 0) {
-                this.head = current.next;
-            } else {
-                while (index++ < pos) {
-                    previous = current;
-                    current = current.next;
-                }
-                previous.next = current.next;
-            }
-            this.len--;
-            return current.elem;
-        } else {
-            return null;
-        }
+        children.forEach(element => {
+            let child = new Node(element)
+            child.father = node
+        });
+
+        node.childs = childs
+
+        return node
     }
 
-
-    public insert(elem: Tower, pos: number) {
-        if (pos > -1 && pos < this.len) {
-            let current: Node = this.head;
-            let index: number = 0;
-            let previous: Node;
-            let node: Node = new Node(elem);
-
-            if (pos === 0) {
-                node.next = current;
-                this.head = node;
-            } else {
-                while (index++ < pos) {
-                    previous = current;
-                    current = current.next;
-                }
-                node.next = current;
-                previous.next = node;
-            }
-            this.len++;
-            return true;
-        } else {
-            return false;
+    public insertNode(node: Node) {
+        if (this.getHead() == undefined) {
+            this.head = node
+            return
         }
+
+        let found = this.findNodeByName(node.elem.name)
+        if (found == undefined) {
+            this.head = node
+            return
+        }
+
+        node.childs.forEach((element: Node) => {
+            let child_found = node.childs.find((value, index, array) => value.elem.name == element.elem.name)
+
+            if (child_found == undefined) {
+                element.father = found
+            }
+        });
     }
 }
